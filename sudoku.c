@@ -1,3 +1,4 @@
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
@@ -48,38 +49,35 @@ int is_valid(Node* n){
 
     return 1;
 }
-*/
+
 int is_valid(Node* n){
    
-    for (int i = 0; i < 9; i++) {
-        int seen[10] = {0};
+   for (int i = 0; i < 9; i++) {
+      int seen[10] = {0};
         for (int j = 0; j < 9; j++) {
             int num = n->sudo[i][j];
-            if (num != 0) { // Ignorar celdas vacías
-                if (seen[num]) // Si el número ya se vio antes, la fila no es válida
+            if (num != 0) {
+                if (seen[num])
                     return 0;
                 seen[num] = 1;
             }
-        }
-    }
+      }
+   }
 
-    // Verificar columnas
     for (int j = 0; j < 9; j++) {
-        int seen[10] = {0}; // Array para rastrear los números vistos
-        for (int i = 0; i < 9; i++) {
-            int num = n->sudo[i][j];
-            if (num != 0) { // Ignorar celdas vacías
-                if (seen[num]) // Si el número ya se vio antes, la columna no es válida
-                    return 0;
-                seen[num] = 1;
-            }
-        }
+       int seen[10] = {0};
+       for (int i = 0; i < 9; i++) {
+          int num = n->sudo[i][j];
+          if (num != 0) {
+             if (seen[num]) return 0;
+             seen[num] = 1;
+         }
+      }
     }
 
-    // Verificar subgrids 3x3
     for (int k = 0; k < 9; k += 3) {
         for (int l = 0; l < 9; l += 3) {
-            int seen[10] = {0}; // Array para rastrear los números vistos
+            int seen[10] = {0};
             for (int i = k; i < k + 3; i++) {
                 for (int j = l; j < l + 3; j++) {
                     int num = n->sudo[i][j];
@@ -95,7 +93,40 @@ int is_valid(Node* n){
 
     return 1;
 }
+*/
 
+int is_valid(Node* n){
+    int seen[10] = {0};
+
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (n->sudo[i][j] != 0 && seen[n->sudo[i][j]])
+                return 0;
+            seen[n->sudo[i][j]] = 1;
+
+            if (n->sudo[j][i] != 0 && seen[n->sudo[j][i]])
+                return 0;
+            seen[n->sudo[j][i]] = 1;
+        }
+        memset(seen, 0, sizeof(seen)); 
+    }
+
+    // 3x3
+    for (int k = 0; k < 9; k += 3) {
+        for (int l = 0; l < 9; l += 3) {
+            memset(seen, 0, sizeof(seen)); 
+            for (int i = k; i < k + 3; i++) {
+                for (int j = l; j < l + 3; j++) {
+                    if (n->sudo[i][j] != 0 && seen[n->sudo[i][j]])
+                        return 0;
+                    seen[n->sudo[i][j]] = 1;
+                }
+            }
+        }
+    }
+
+    return 1;
+}
 
 
 List* get_adj_nodes(Node* n){
