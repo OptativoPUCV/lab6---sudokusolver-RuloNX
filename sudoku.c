@@ -43,51 +43,59 @@ void print_node(Node* n){
     printf("\n");
 }
 
+/*
 int is_valid(Node* n){
-    // Check rows and columns
-    int i, j, k;
-    int row[9] = {0};
-    int col[9] = {0};
-    
-    for (i = 0; i < 9; i++) {
-        for (j = 0; j < 9; j++) {
-            k = n->sudo[i][j];
-            if (k < 1 || k > 9 || row[k - 1] || col[k - 1]) {
-                return 0;
+
+    return 1;
+}
+*/
+int is_valid(Node* n){
+   
+    for (int i = 0; i < 9; i++) {
+        int seen[10] = {0};
+        for (int j = 0; j < 9; j++) {
+            int num = n->sudo[i][j];
+            if (num != 0) { // Ignorar celdas vacías
+                if (seen[num]) // Si el número ya se vio antes, la fila no es válida
+                    return 0;
+                seen[num] = 1;
             }
-            row[k - 1] = 1;
-            col[k - 1] = 1;
-        }
-        for (k = 0; k < 9; k++) {
-            row[k] = 0;
-            col[k] = 0;
         }
     }
 
-    // Check 3x3 subgrids
-    int row_start, col_start;
-    
-    for (row_start = 0; row_start < 9; row_start += 3) {
-        for (col_start = 0; col_start < 9; col_start += 3) {
-            for (i = row_start; i < row_start + 3; i++) {
-                for (j = col_start; j < col_start + 3; j++) {
-                    k = n->sudo[i][j];
-                    if (k < 1 || k > 9 || row[k - 1] || col[k - 1]) {
-                        return 0;
-                    }
-                    row[k - 1] = 1;
-                    col[k - 1] = 1;
-                }
+    // Verificar columnas
+    for (int j = 0; j < 9; j++) {
+        int seen[10] = {0}; // Array para rastrear los números vistos
+        for (int i = 0; i < 9; i++) {
+            int num = n->sudo[i][j];
+            if (num != 0) { // Ignorar celdas vacías
+                if (seen[num]) // Si el número ya se vio antes, la columna no es válida
+                    return 0;
+                seen[num] = 1;
             }
-            for (k = 0; k < 9; k++) {
-                row[k] = 0;
-                col[k] = 0;
+        }
+    }
+
+    // Verificar subgrids 3x3
+    for (int k = 0; k < 9; k += 3) {
+        for (int l = 0; l < 9; l += 3) {
+            int seen[10] = {0}; // Array para rastrear los números vistos
+            for (int i = k; i < k + 3; i++) {
+                for (int j = l; j < l + 3; j++) {
+                    int num = n->sudo[i][j];
+                    if (num != 0) {
+                        if (seen[num])
+                            return 0;
+                        seen[num] = 1;
+                    }
+                }
             }
         }
     }
 
     return 1;
 }
+
 
 
 List* get_adj_nodes(Node* n){
