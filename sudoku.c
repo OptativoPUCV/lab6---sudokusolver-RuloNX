@@ -130,8 +130,8 @@ Node* DFS(Node* initial, int* cont){
     List* stack = createList();
     pushBack(stack, initial);
 
-    while (!is_empty(stack)){ // Cambié isEmpty a is_empty
-        Node* current = (Node*)popBack(stack); // Hicimos un cast explícito a Node*
+    while (!is_empty(stack)){
+        Node* current = (Node*)popBack(stack);
         (*cont)++;
 
         if(is_final(current)){
@@ -139,10 +139,10 @@ Node* DFS(Node* initial, int* cont){
         }
 
         List* adj_nodes = get_adj_nodes(current);
-        Node* temp = (Node*)adj_nodes->first; // Hicimos un cast explícito a Node*
+        Node* temp = (Node*)adj_nodes->first;
         while (temp != NULL){
             pushBack(stack, temp);
-            temp = (Node*)next(adj_nodes); // Hicimos un cast explícito a Node*
+            temp = (Node*)next(adj_nodes);
         }
         destroyList(adj_nodes);
     }
