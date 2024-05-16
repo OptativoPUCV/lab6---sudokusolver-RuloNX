@@ -107,9 +107,21 @@ int is_final(Node* n){
 }
 
 Node* DFS(Node* initial, int* cont){
-  return NULL;
-}
+    (*cont)++; // Incrementar el contador de iteraciones
+    if (is_final(initial))
+        return initial; // Si el nodo inicial es un estado final, devolverlo como solución
 
+    List* adj_nodes = get_adj_nodes(initial); // Obtener nodos adyacentes
+    Node* solution = NULL;
+    Node* temp;
+    while ((temp = popFront(adj_nodes)) != NULL) {
+        solution = DFS(temp, cont); // Llamar recursivamente a DFS con los nodos adyacentes
+        if (solution != NULL) // Si se encuentra una solución, salir del bucle
+            break;
+    }
+    freeList(adj_nodes); // Liberar memoria de la lista de nodos adyacentes
+    return solution; // Devolver la solución encontrada o NULL si no se encontró ninguna solución
+}
 
 
 /*
