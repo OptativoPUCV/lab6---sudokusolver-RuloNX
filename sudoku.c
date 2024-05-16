@@ -96,32 +96,15 @@ List* get_adj_nodes(Node* n){
     return list;
 }
 
+
 int is_final(Node* n){
-    for (int i = 0; i < 9; i++) {
-       for (int j = 0; j < 9; j++) {
-          if (n->sudo[i][j] == 0 || !is_valid(n))
-             return 0;
-      }
-    }
-    return 1;
+    return 0;
 }
 
 Node* DFS(Node* initial, int* cont){
-    (*cont)++; // Incrementar el contador de iteraciones
-    if (is_final(initial))
-        return initial; // Si el nodo inicial es un estado final, devolverlo como solución
-
-    List* adj_nodes = get_adj_nodes(initial); // Obtener nodos adyacentes
-    Node* solution = NULL;
-    Node* temp;
-    while ((temp = popFront(adj_nodes)) != NULL) {
-        solution = DFS(temp, cont); // Llamar recursivamente a DFS con los nodos adyacentes
-        if (solution != NULL) // Si se encuentra una solución, salir del bucle
-            break;
-    }
-    freeList(adj_nodes); // Liberar memoria de la lista de nodos adyacentes
-    return solution; // Devolver la solución encontrada o NULL si no se encontró ninguna solución
+  return NULL;
 }
+
 
 
 /*
