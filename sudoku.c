@@ -96,25 +96,28 @@ int is_valid(Node* n){
 */
 
 int is_valid(Node* n){
-    int seen[10] = {0};
+    int seen[10] = {0}; // Array para rastrear los números vistos
 
+    // Verificar filas y columnas
     for (int i = 0; i < 9; i++) {
+        memset(seen, 0, sizeof(seen)); // Reiniciar el array de números vistos para cada fila y columna
         for (int j = 0; j < 9; j++) {
+            // Verificar filas
             if (n->sudo[i][j] != 0 && seen[n->sudo[i][j]])
                 return 0;
             seen[n->sudo[i][j]] = 1;
 
+            // Verificar columnas
             if (n->sudo[j][i] != 0 && seen[n->sudo[j][i]])
                 return 0;
             seen[n->sudo[j][i]] = 1;
         }
-        memset(seen, 0, sizeof(seen)); 
     }
 
-    // 3x3
+    // Verificar subgrids 3x3
     for (int k = 0; k < 9; k += 3) {
         for (int l = 0; l < 9; l += 3) {
-            memset(seen, 0, sizeof(seen)); 
+            memset(seen, 0, sizeof(seen)); // Reiniciar el array de números vistos para cada subgrid
             for (int i = k; i < k + 3; i++) {
                 for (int j = l; j < l + 3; j++) {
                     if (n->sudo[i][j] != 0 && seen[n->sudo[i][j]])
@@ -125,7 +128,7 @@ int is_valid(Node* n){
         }
     }
 
-    return 1;
+    return 1; // Si pasa todas las verificaciones, el nodo es válido
 }
 
 
