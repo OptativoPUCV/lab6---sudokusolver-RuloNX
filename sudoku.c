@@ -44,6 +44,47 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n){
+    // Check rows and columns
+    int i, j, k;
+    int row[9] = {0};
+    int col[9] = {0};
+    
+    for (i = 0; i < 9; i++) {
+        for (j = 0; j < 9; j++) {
+            k = n->sudo[i][j];
+            if (k < 1 || k > 9 || row[k - 1] || col[k - 1]) {
+                return 0;
+            }
+            row[k - 1] = 1;
+            col[k - 1] = 1;
+        }
+        for (k = 0; k < 9; k++) {
+            row[k] = 0;
+            col[k] = 0;
+        }
+    }
+
+    // Check 3x3 subgrids
+    int row_start, col_start;
+    
+    for (row_start = 0; row_start < 9; row_start += 3) {
+        for (col_start = 0; col_start < 9; col_start += 3) {
+            for (i = row_start; i < row_start + 3; i++) {
+                for (j = col_start; j < col_start + 3; j++) {
+                    k = n->sudo[i][j];
+                    if (k < 1 || k > 9 || row[k - 1] || col[k - 1]) {
+                        return 0;
+                    }
+                    row[k - 1] = 1;
+                    col[k - 1] = 1;
+                }
+            }
+            for (k = 0; k < 9; k++) {
+                row[k] = 0;
+                col[k] = 0;
+            }
+        }
+    }
 
     return 1;
 }
