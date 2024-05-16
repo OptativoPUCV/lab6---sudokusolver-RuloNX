@@ -99,3 +99,30 @@ Thu 16 May 2024 03:48:27 PM UTC:
  tests:  4|3
 total_score: 30/70
 c963266
+Thu 16 May 2024 03:51:53 PM UTC: 
+ sudoku.c | 28 +++++++++++++++++++++++++---
+ 1 file changed, 25 insertions(+), 3 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:133:13: error: implicit declaration of function ‘isEmpty’; did you mean ‘is_empty’? [-Werror=implicit-function-declaration]
+  133 |     while (!isEmpty(stack)){
+      |             ^~~~~~~
+      |             is_empty
+sudoku.c:134:25: error: void value not ignored as it ought to be
+  134 |         Node* current = popBack(stack);
+      |                         ^~~~~~~
+sudoku.c:142:31: error: invalid use of incomplete typedef ‘List’
+  142 |         Node* temp = adj_nodes->head;
+      |                               ^~
+sudoku.c:144:33: error: ‘Node’ has no member named ‘data’
+  144 |             pushBack(stack, temp->data);
+      |                                 ^~
+sudoku.c:145:24: error: ‘Node’ has no member named ‘next’
+  145 |             temp = temp->next;
+      |                        ^~
+sudoku.c:147:9: error: implicit declaration of function ‘destroyList’ [-Werror=implicit-function-declaration]
+  147 |         destroyList(adj_nodes);
+      |         ^~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+9e762e9
