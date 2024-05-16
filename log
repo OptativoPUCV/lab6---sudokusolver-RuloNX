@@ -2,3 +2,14 @@ Thu 16 May 2024 03:08:47 PM UTC:
  tests:  0|5
 total_score: 0/70
 ce1ba97
+Thu 16 May 2024 03:10:35 PM UTC: 
+ sudoku.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:62:21: error: implicit declaration of function ‘appendList’ [-Werror=implicit-function-declaration]
+   62 |                     appendList(list, adj_node);
+      |                     ^~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+9c80b4f
