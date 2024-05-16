@@ -126,7 +126,7 @@ Node *DFS(Node *initial, int *cont) {
 
   while (!is_empty(stack)) {
     Node *current = NULL;
-    current = (Node *)popBack(stack);
+    //current = (Node *)popBack(stack);
     
     (*cont)++;
 
