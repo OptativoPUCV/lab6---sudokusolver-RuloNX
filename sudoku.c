@@ -120,14 +120,19 @@ int is_final(Node *n) {
   return 1;
 }
 
+
+Node *DFS(Node *initial, int *cont) {
+  return NULL;
+}
+
+/*
 Node *DFS(Node *initial, int *cont) {
   List *stack = createList();
   pushBack(stack, initial);
 
   while (!is_empty(stack)) {
-    Node *current = NULL;
-    //current = (Node *)popBack(stack);
-    
+    Node* current = (Node*)front(stack);
+    popBack(stack);
     (*cont)++;
 
     if (is_final(current)) {
@@ -145,7 +150,7 @@ Node *DFS(Node *initial, int *cont) {
   return NULL;
 }
 
-/*
+
 int main( int argc, char *argv[] ){
 
   Node* initial= read_file("s12a.txt");;
