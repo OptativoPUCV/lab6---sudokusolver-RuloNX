@@ -160,3 +160,13 @@ sudoku.c:147:9: error: implicit declaration of function ‘destroyList’ [-Werr
 cc1: all warnings being treated as errors
 Compilation failed
 f27ac48
+Thu 16 May 2024 03:59:00 PM UTC: 
+ sudoku.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:134:40: error: invalid use of incomplete typedef ‘List’
+  134 |         Node* current = (Node*)popBack(*stack);
+      |                                        ^~~~~~
+Compilation failed
+73b5c34

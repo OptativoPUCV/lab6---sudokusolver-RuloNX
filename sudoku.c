@@ -131,7 +131,7 @@ Node* DFS(Node* initial, int* cont){
     pushBack(stack, initial);
 
     while (!is_empty(stack)){
-        Node* current = (Node*)popBack(stack);
+        Node* current = (Node*)popBack(*stack);
         (*cont)++;
 
         if(is_final(current)){
@@ -139,12 +139,12 @@ Node* DFS(Node* initial, int* cont){
         }
 
         List* adj_nodes = get_adj_nodes(current);
-        Node* temp = (Node*)adj_nodes->first;
+        Node* temp = (Node*)front(adj_nodes);
         while (temp != NULL){
             pushBack(stack, temp);
             temp = (Node*)next(adj_nodes);
         }
-        destroyList(adj_nodes);
+       clean(adj_nodes);
     }
     return NULL;
 }
