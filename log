@@ -13,3 +13,9 @@ sudoku.c:62:21: error: implicit declaration of function ‘appendList’ [-Werro
 cc1: all warnings being treated as errors
 Compilation failed
 9c80b4f
+Thu 16 May 2024 03:13:15 PM UTC: 
+ sudoku.c | 16 ----------------
+ 1 file changed, 16 deletions(-)
+ tests:  0|5
+total_score: 0/70
+c801c07
