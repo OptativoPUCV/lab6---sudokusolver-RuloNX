@@ -170,3 +170,13 @@ sudoku.c:134:40: error: invalid use of incomplete typedef ‘List’
       |                                        ^~~~~~
 Compilation failed
 73b5c34
+Thu 16 May 2024 04:06:12 PM UTC: 
+ sudoku.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:129:15: error: invalid use of void expression
+  129 |     current = (Node *)popBack(stack);
+      |               ^
+Compilation failed
+7851510
